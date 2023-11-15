@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<img id="targetImg" src="./123.png" alt="" />
+		<button onclick="save()">save</button>
+
+		<script>
+			function save() {
+				const targetElement = document.getElementById('targetImg');
+
+				const canvas = document.createElement('canvas');
+				const context = canvas.getContext('2d');
+
+				canvas.width = targetElement.offsetWidth;
+				canvas.height = targetElement.offsetHeight;
+				context.drawImage(targetElement, 0, 0, targetElement.offsetWidth, targetElement.offsetHeight);
+
+				const dataUrl = canvas.toDataURL();
+				const downloadLink = document.createElement('a');
+				downloadLink.href = dataUrl;
+				downloadLink.download = '123.png';
+
+				document.body.appendChild(downloadLink);
+				downloadLink.click();
+				document.body.removeChild(downloadLink);
+			}
+		</script>
+	</body>
+</html>
